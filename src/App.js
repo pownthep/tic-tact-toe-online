@@ -5,7 +5,7 @@ import io from "socket.io-client";
 
 function App() {
   const [rowCol, setRowCol] = React.useState(3);
-  const socket = io("https://tic-tac-toe-online-pownthep.herokuapp.com");
+  const socket = io("http://35.247.185.37:8080");
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const [gameId, setId] = React.useState("");
@@ -37,6 +37,7 @@ function App() {
       row: rowCol,
     });
     setStatus("Waiting player to join");
+    setGameOver(false);
   };
 
   socket.on("created game", (id) => {

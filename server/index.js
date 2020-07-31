@@ -1,9 +1,17 @@
-var app = require("express")();
+var express = require("express");
+var app = express();
 var http = require("http").createServer(app);
 var io = require("socket.io")(http);
+const path = require("path");
 
 var gameId = {};
 var counter = 0;
+
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 io.on("connection", (socket) => {
   socket.on("create game", (game) => {

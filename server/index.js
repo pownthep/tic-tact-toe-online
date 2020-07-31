@@ -69,7 +69,7 @@ io.on("connection", (socket) => {
 });
 
 http.listen(process.env.PORT || 8080, () => {
-  console.log("listening on *:8080");
+  console.log(`listening on ${process.env.PORT || 8080}`);
 });
 
 function checkWinner(id, pos, number) {

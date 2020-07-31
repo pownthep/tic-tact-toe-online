@@ -5,7 +5,7 @@ import io from "socket.io-client";
 
 function App() {
   const [rowCol, setRowCol] = React.useState(3);
-  const socket = io("https://tic-tac-toe-online-pownthep.herokuapp.com:8080");
+  const socket = io("https://tic-tac-toe-online-pownthep.herokuapp.com");
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const [gameId, setId] = React.useState("");
@@ -36,6 +36,7 @@ function App() {
       col: rowCol,
       row: rowCol,
     });
+    setStatus("Waiting player to join");
   };
 
   socket.on("created game", (id) => {
@@ -44,6 +45,7 @@ function App() {
   });
 
   socket.on("prepare game", (data) => {
+    setStatus("Started");
     setGame(data.game);
     setMark(data.mark);
     setTurn(data.turn);
@@ -109,7 +111,7 @@ function App() {
             }}
           />
           <button onClick={createGame}>Create game</button>
-          <p>Game ID: {gameId}</p>
+          <p>Game ID: {gameId} Player: {player}</p>
           <p>
             Join game at:{" "}
             {window.location.protocol +

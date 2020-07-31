@@ -5,7 +5,7 @@ import io from "socket.io-client";
 
 function App() {
   const [rowCol, setRowCol] = React.useState(3);
-  const socket = io("http://localhost:8080");
+  const socket = io("https://tic-tac-toe-online-pownthep.herokuapp.com:8080");
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const [gameId, setId] = React.useState("");
